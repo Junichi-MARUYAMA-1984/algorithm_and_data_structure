@@ -15,17 +15,16 @@ int main() {
     }
 
     int min_value = INF;
-    int min_second_value = INF;
+    int max_value = -INF;
     for (int i = 0; i < N; ++i) {
         if (a[i] < min_value) {
             min_value = a[i];
         }
 
-        if (a[i] > min_value && a[i] < min_second_value) {
-            min_second_value = a[i];
+        if (a[i] > max_value) {
+            max_value = a[i];
         }
     }
 
-    cout << "Minimum value: " << min_value << endl;
-    cout << "Second minumum value: " << min_second_value << endl;
+    cout << max_value - min_value << endl;
 }
