@@ -2,23 +2,17 @@
 using namespace std;
 
 int main() {
-    int N, K;
-    cin >> N >> K;
+    int K, N;
+    cin >> K >> N;
 
-    int result = 0;
-    for (int i = 1; i < N; ++i) {
-        if (i > K) {
-            break;
-        }
-        for (int j = i; j < N - i; ++j) {
-            int diff = N - i - j;
-            if (diff <= K && diff >= i && diff >= j) {
-                ++result;
-            } else {
-                continue;
+    int count = 0;
+    for (int x = 0; x <= min(K, N); ++x) {
+        for (int y = 0; y <= min(K, N); ++y) {
+            int z = N - x - y;
+            if (z >= 0 && z <= K) {
+                ++count;
             }
         }
     }
-
-    cout << result << endl;
+    cout << count << endl;
 }
