@@ -2,10 +2,12 @@
 #include <vector>
 using namespace std;
 
+const int INF = 200000000; // 十分大きな値にする。
+
 int main() {
     // 入力を受け取る
-    int N, v;
-    cin >> N >> v;
+    int N;
+    cin >> N;
 
     vector<int> a(N);
     for (int i = 0; i < N; ++i) {
@@ -13,14 +15,13 @@ int main() {
     }
 
     // 線型探索
-    int found_id = -1; // 初期値は-1などとあり得ない値に。
-    for (int i = 0; i < N; ++i) {
-        if (a[i] == v) {
-            found_id = i; // 見つかったら添字を記録。
-            break; // ループを抜ける。
+    int min_value = INF;
+    for (int i = 0; i < N; i++) {
+        if (a[i] < min_value) {
+            min_value = a[i];
         }
     }
 
-    // 結果出力 (-1のときは見つからなかったことを意味する)
-    cout << found_id << endl;
+    // 結果出力
+    cout << min_value << endl;
 }
