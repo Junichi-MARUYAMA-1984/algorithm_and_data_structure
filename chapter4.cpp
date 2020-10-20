@@ -2,21 +2,17 @@
 
 using namespace std;
 
-int func(int N) {
-    // 再帰関数を呼び出したことを報告する。
-    cout << "func(" << N << ") を呼び出しました。" << endl;
-
-    if (N == 0) {
-        return 0;
+int GCD(int m, int n) {
+    // ベースケース
+    if (n == 0) {
+        return m;
     }
 
-    // 再帰的に答えを求めて出力する。
-    int result = N + func(N - 1);
-    cout << N << " までの和 = " << result << endl;
-
-    return result;
+    // 再帰呼び出し
+    return GCD(n, m % n);
 }
 
 int main() {
-    func(5);
+    cout << GCD(51, 15) << endl; // 3が出力される
+    cout << GCD(15, 51) << endl; // 3が出力される
 }
