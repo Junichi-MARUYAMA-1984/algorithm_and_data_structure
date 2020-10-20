@@ -2,44 +2,34 @@
 #include <vector>
 using namespace std;
 
-bool func(int i, int w, const vector<int>& a) {
+vector<int> memo;
+
+int tribo(int N) {
     // ベースケース
-    if (i == 0) {
-        if (w == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    if (N == 0) {
+        return 0;
+    } else if (N == 1) {
+        return 0;
+    } else if (N == 2) {
+        return 1;
     }
 
-    // a[i - 1]を選ばない場合
-    if (func(i - 1, w, a)) {
-        return true;
+    // メモ化変数に計算結果がある場合はそれを返す。
+    if (memo[N] != -1) {
+        return memo[N];
     }
 
-    // a[i - 1]を選ぶ場合
-    if (func(i - 1, w - a[i - 1], a)) {
-        return true;
-    }
-
-    // どちらもfalseの場合は、false
-    return false;   
+    // 再帰呼び出し
+    return memo[N] = tribo(N - 1) + tribo(N - 2) + tribo(N - 3);
 }
 
 int main() {
-    // 入力
-    int N, W;
-    cin >> N >> W;
+    // 求める項目を入力
+    int num;
+    cin >> num;
 
-    vector<int> a(N);
-    for (int i = 0; i < N; ++i) {
-        cin >> a[i];
-    }
+    // メモ化変数を初期化
+    memo.assign(num, -1);
 
-    // 再帰的に解く
-    if (func(N, W, a)) {
-        cout << "Yes" << endl;
-    } else {
-        cout << "No" << endl;
-    }
+    cout << tribo(num - 1) << endl;
 }
