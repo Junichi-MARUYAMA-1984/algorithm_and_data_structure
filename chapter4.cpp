@@ -24,7 +24,7 @@ int func(int i, int w, const vector<int>& a) {
     }
 
     // どちらもfalseの場合は、false
-    return 0;
+    return memo.at(i).at(w) = 0;
 }
 
 int main() {
