@@ -3,11 +3,35 @@
 
 using namespace std;
 
+// fibo(N)の答えをメモ化する配列
+vector<long long> memo;
+
+long long fibo(int N) {
+    // ベースケース
+    if (N == 0) {
+        return 0;
+    } else if (N == 1) {
+        return 1;
+    }
+
+    // メモをチェック。既に計算済みなら答えをリターンする。
+    if (memo[N] != -1) {
+        return memo[N];
+    }
+
+    // 答えをメモ化しながら再帰呼び出し。
+    return memo[N] = fibo(N - 1) + fibo(N - 2);
+}
+
 int main() {
-    vector<long long> F(50);
-    F[0] = 0, F[1] = 1;
+    // メモ化用配列を-1で初期化する。
+    memo.assign(50, -1);
+
+    // fibo(49)を呼び出す。
+    fibo(49);
+
+    // memo[0], ..., memo[49]に答えが格納されている。
     for (int N = 2; N < 50; ++N) {
-        F[N] = F[N - 1] + F[N - 2];
-        cout << N << " 項目: " << F[N] << endl;
+        cout << N << " 項目: " << memo[N] << endl;
     }
 }
