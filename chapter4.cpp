@@ -2,34 +2,55 @@
 #include <vector>
 using namespace std;
 
-vector<int> memo;
+vector<vector<bool>> memo;
 
-int tribo(int N) {
+bool func(int i, int w, const vector<int>& a) {
     // ベースケース
-    if (N == 0) {
-        return 0;
-    } else if (N == 1) {
-        return 0;
-    } else if (N == 2) {
-        return 1;
+    if (i == 0) {
+        if (w == 0) {
+            return memo.at(0).at(0) = true;
+        } else {
+            return false;
+        }
     }
 
-    // メモ化変数に計算結果がある場合はそれを返す。
-    if (memo[N] != -1) {
-        return memo[N];
+    // a[i - 1]を選ばない場合
+    if (memo.at(i - 1).at(w)) {
+        return memo.at(i).at(w) = true;
+    } else if (func(i - 1, w, a)) {
+        return memo.at(i).at(w) = true;
     }
 
-    // 再帰呼び出し
-    return memo[N] = tribo(N - 1) + tribo(N - 2) + tribo(N - 3);
+    // a[i - 1]を選ぶ場合
+    if (w - a[i - 1] >= 0) {
+        if (memo.at(i - 1).at(w - a[i - 1])) {
+            return memo.at(i).at(w) = true;
+        } else if (func(i - 1, w - a[i - 1], a)) {
+            return memo.at(i).at(w) = true;
+        }
+    }
+
+    // どちらもfalseの場合は、false
+    return false;
 }
 
 int main() {
-    // 求める項目を入力
-    int num;
-    cin >> num;
+    // 入力
+    int N, W;
+    cin >> N >> W;
+
+    vector<int> a(N);
+    for (int i = 0; i < N; ++i){
+        cin >> a[i];
+    }
 
     // メモ化変数を初期化
-    memo.assign(num, -1);
+    memo.assign(N + 1, vector<bool>(W + 1, false));
 
-    cout << tribo(num - 1) << endl;
+    // 再帰的に解く
+    if (func(N, W, a)) {
+        cout << "Yes" << endl;
+    } else {
+        cout << "No" << endl;
+    }
 }
