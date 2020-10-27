@@ -1,7 +1,14 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-const long long INF = 1LL << 60; // 十分大きな値とする。（ここでは2^60）
+
+template<class T> void chmin(T& a, T b) {
+    if (a > b) {
+        a = b;
+    }
+}
+
+const long long INF = 1LL << 60; // 十分大きな値とする。ここでは2^60
 
 int main() {
     // 入力
@@ -13,7 +20,7 @@ int main() {
         cin >> h[i];
     }
 
-    // 配列dpを定義。（配列全体を無限大を表す値に初期化）
+    // 初期化（最小化問題なので、INFに初期化する）
     vector<long long> dp(N, INF);
 
     // 初期条件
@@ -21,11 +28,9 @@ int main() {
 
     // ループ
     for (int i = 1; i < N; ++i) {
-        if (i == 1) {
-            dp[i] = abs(h[i] - h[i - 1]);
-        } else {
-            dp[i] = min(dp[i - 1] + abs(h[i] - h[i - 1]), 
-                        dp[i - 2] + abs(h[i] - h[i - 2]));
+        chmin(dp[i], dp[i - 1] + abs(h[i] - h[i - 1]));
+        if (i > 1) {
+            chmin(dp[i], dp[i - 2] + abs(h[i] - h[i - 2]));
         }
     }
 
