@@ -20,6 +20,7 @@ int main() {
     }
 
     // DPテーブル定義
+    // vector<long long>(W + 1, 0)の二番目の引数0は多次元配列の初期値。
     vector<vector<long long>> dp(N + 1, vector<long long>(W + 1, 0));
 
     // DPループ
