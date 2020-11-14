@@ -4,7 +4,7 @@ using namespace std;
 int main() {
     cout << "Start Game!" << endl;
 
-    // Aさんの数の候補を表す区間を、[left, right)とする。
+    // Aさんの数の候補を表す区間を、[left, right)とする。。
     int left = 20, right = 36;
 
     // Aさんの数を1つに絞り切れないうちは繰り返す。
