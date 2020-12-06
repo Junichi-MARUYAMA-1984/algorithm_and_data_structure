@@ -66,7 +66,8 @@ struct FordFulkerson {
         // 終端tに到達したらリターン。
         if (v == t) return f;
 
-        // 深さ優先探索
+        // 深さ優先探索。
+        // 一個でもtに到達するパスが見つかれば関数を抜ける。
         seen[v] = true;
         for (auto &e : G[v]) {
             if (seen[e.to]) continue;
