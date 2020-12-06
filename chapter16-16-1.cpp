@@ -95,7 +95,7 @@ struct FordFulkerson {
     }
 
     // グラフGのs-t間の最大流量を求める。
-    // ただしリターン時にGは残余グラフになる。
+    // ただしリターン時にGは残余グラフになる。（最終探索終了時の残余グラフ）
     int solve(Graph &G, int s, int t) {
         int res = 0;
 
