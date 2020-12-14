@@ -10,7 +10,7 @@ vector<long long> w; // 各頂点の重み
 Graph G; // グラフ
 
 // 木上の動的計画法テーブル
-vector<int> dp1, dp2;
+vector<long long> dp1, dp2;
 
 void dfs(int v, int p = -1) {
     // 最初に各子頂点を探索しておく。
